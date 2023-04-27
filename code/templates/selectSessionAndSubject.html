@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<head>
+    <title>Select Session</title>
+    <style>
+        td{
+            width:100pt;
+            height:40pt;
+            text-align:center;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- <div id="header">
+        <span id="username-label"></span>
+    </div> -->
+    <!-- <div class="tab">
+        <button id="add-class-tab-btn" class="tablinks">Add Class</button>
+        <button id="delete-class-tab-btn" class="tablinks">Delete Class</button>
+        <button id="view-schedule-tab-btn" class="tablinks">View Schedule</button>
+        <button id="profile-btn" class="tablinks" onclick="showPopup()"></button>
+        <button id="extra-note-tab-btn" class = "tablinks">Extra Notes</button>
+        <button id="student-services-tab-btn" class="tablinks">Student Services</button>
+        <button id="course-offerings-tab-btn" class="tablinks"><a href="/selectsessionandsubject">Course Offerings</a></button>
+    </div> -->
+
+    <h1>Select Session and Subject</h1>
+    <hr>
+    <form name="form1" id="form1" action="/courseofferings" method="get"> 
+        Session: <select name="session" id="session">
+          <option value="None" selected="None">None</option>
+          <option value="2022-2023-Fall" selected="2022-2023-Fall">2022-2023 Fall</option>
+          <option value="2022-2023-Spring" selected="2022-2023-Spring">2022-2023 Spring</option>
+          <option value="2022-2023-Winter" selected="2022-2023-Winter">2022-2023 Winter</option>
+        </select>
+        <br><br>
+        Subject: <select name="subject" id="subject">
+          <option value="All" selected="All">All</option>
+          <option value="ANTH" selected="ANTH">Anthropology</option>
+          <option value="ARCH" selected="ARCH">Archaeology</option>
+          <option value="BIOC" selected="BIOC">Biochemistry</option>
+          <option value="BIOL" selected="BIOL">Biology</option>
+          <option value="BUSI" selected="BUSI">Business</option>
+          <option value="CHEM" selected="CHEM">Chemistry</option>
+          <option value="CIV" selected="CIV">Civil Engineering</option>
+          <option value="CLAS" selected="CLAS">Classics</option>
+          <option value="CMST" selected="CMST">Cummunication Studies</option>
+          <option value="COMP" selected="COMP">Computer Science</option>
+          <option value="CRIM" selected="CRIM">Criminology</option>
+          <option value="EASC" selected="EASC">Earth Scienes</option>
+          <option value="ECE" selected="ECE">Electrical/Computer Engineering</option>
+          <option value="ECON" selected="ECON">Economy</option>
+          <option value="ED" selected="ED">Education</option>
+          <option value="LANG" selected="LANG">Language</option>
+          <option value="LING" selected="LING">Linguistics</option>
+          <option value="LWSO" selected="LWSO">Law and Society</option>
+          <option value="MATH" selected="MATH">Mathematics</option>
+          <option value="ME" selected="ME">Mechanical Engineering</option>
+          <option value="MED" selected="MED">Medicine</option>
+          <option value="MEMS" selected="MEMS">Medieval & Early Modern Stud</option>
+          <option value="MUS" selected="MUS">Music</option>
+          <option value="NURS" selected="NURS">Nursing</option>
+          <option value="OCSC" selected="OCSC">Ocean Sciences</option>
+          <option value="ONAE" selected="ONAE">Ocean/Naval Engieering</option>
+          <option value="PHAR" selected="PHAR">Pharmacy</option>
+          <option value="PHIL" selected="PHIL">Philosphy</option>
+          <option value="PHYS" selected="PHYS">Physics</option>
+          <option value="POSC" selected="POSC">Post Graduate Certificate</option>
+          <option value="PROC" selected="PROC">Process Engieering</option>
+          <option value="PSYC" selected="PSYC">Psychology</option>
+          <option value="RELS" selected="RELS">Religious Studies</option>
+          <option value="RUSS" selected="RUSS">Russian</option>
+          <option value="SCWK" selected="SCWK">Social Work</option>
+          <option value="SOCI" selected="SOCI">Sociology</option>
+          <option value="SPAN" selected="SPAN">Spanish</option>
+          <option value="STAT" selected="STAT">Statistic</option>
+          <option value="UGRD" selected="UGRD">Undergraduate Studies</option>
+        </select>
+        <br><br>
+        <br><br>
+        <input type="submit" value="Submit">
+      </form>
+      <div id="add-class-tab" class="tabcontent">
+        <p id="sections-instructions">Enter a subject (ex: COMP) and a number (ex: 1001) to see sections of that specific class. To view all the classes for that specific subject, use "ALL" as the number.</p>
+        <form>
+            <label for="find-subject">Subject:</label>
+            <input type="text" id="find-subject-search">
+            <label for="find-number">Number:</label>
+            <input type="text" id="find-number-search" value="ALL">
+            <div>
+                <button id="btn-find-class">Find Sections</button>
+                <output id="find-class-out"></output>
+            </div>
+        </form> 
+
+    </div>
+
+    <table id="class-table">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Section</th>
+                <th>Days</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Add Class</th>
+                <th>Response</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <table id="delete-class-table">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Section</th>
+                <th>Days</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Delete Class</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    
+    
+
+    
+
+    <div id="view-schedule-tab" class="tabcontent">
+        <div id="response-container"></div>
+        <form>
+            <table id = "schedule-table" rule=all, border=1 align='center'>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td colspan="7"><h1 align='center'><input type="text" value="Winter 2023 Schedule" style="width: 225px;"></h1></td>
+
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align='center'>Sunday</td>
+                        <td align='center'>Monday</td>
+                        <td align='center'>Tuesday</td>
+                        <td align='center'>Wednesday</td>
+                        <td align='center'>Thursday</td>
+                        <td align='center'>Friday</td>
+                        <td align='center'>Saturday</td>
+                    </tr>
+                    <tr>
+                        <td align='center'>8 AM</td>
+                        <td id ="sun_0800" class = "schedule-cell"></td>
+                        <td id ="mon_0800" class = "schedule-cell"></td>
+                        <td id ="tue_0800" class = "schedule-cell"></td>
+                        <td id ="wed_0800" class = "schedule-cell"></td>
+                        <td id ="thu_0800" class = "schedule-cell"></td>
+                        <td id ="fri_0800" class = "schedule-cell"></td>
+                        <td id ="sat_0800" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>8:30 AM</td>
+                        <td id ="sun_0830" class = "schedule-cell"></td>
+                        <td id ="mon_0830" class = "schedule-cell"></td>
+                        <td id ="tue_0830" class = "schedule-cell"></td>
+                        <td id ="wed_0830" class = "schedule-cell"></td>
+                        <td id ="thu_0830" class = "schedule-cell"></td>
+                        <td id ="fri_0830" class = "schedule-cell"></td>
+                        <td id ="sat_0830" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>9 AM</td>
+                        <td id ="sun_0900" class = "schedule-cell"></td>
+                        <td id ="mon_0900" class = "schedule-cell"></td>
+                        <td id ="tue_0900" class = "schedule-cell"></td>
+                        <td id ="wed_0900" class = "schedule-cell"></td>
+                        <td id ="thu_0900" class = "schedule-cell"></td>
+                        <td id ="fri_0900" class = "schedule-cell"></td>
+                        <td id ="sat_0900" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>9:30 AM</td>
+                        <td id ="sun_0930" class = "schedule-cell"></td>
+                        <td id ="mon_0930" class = "schedule-cell"></td>
+                        <td id ="tue_0930" class = "schedule-cell"></td>
+                        <td id ="wed_0930" class = "schedule-cell"></td>
+                        <td id ="thu_0930" class = "schedule-cell"></td>
+                        <td id ="fri_0930" class = "schedule-cell"></td>
+                        <td id ="sat_0930" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>10 AM</td>
+                        <td id ="sun_1000" class = "schedule-cell"></td>
+                        <td id ="mon_1000" class = "schedule-cell"></td>
+                        <td id ="tue_1000" class = "schedule-cell"></td>
+                        <td id ="wed_1000" class = "schedule-cell"></td>
+                        <td id ="thu_1000" class = "schedule-cell"></td>
+                        <td id ="fri_1000" class = "schedule-cell"></td>
+                        <td id ="sat_1000" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>10:30 AM</td>
+                        <td id ="sun_1030" class = "schedule-cell"></td>
+                        <td id ="mon_1030" class = "schedule-cell"></td>
+                        <td id ="tue_1030" class = "schedule-cell"></td>
+                        <td id ="wed_1030" class = "schedule-cell"></td>
+                        <td id ="thu_1030" class = "schedule-cell"></td>
+                        <td id ="fri_1030" class = "schedule-cell"></td>
+                        <td id ="sat_1030" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>11 AM</td>
+                        <td id ="sun_1100" class = "schedule-cell"></td>
+                        <td id ="mon_1100" class = "schedule-cell"></td>
+                        <td id ="tue_1100" class = "schedule-cell"></td>
+                        <td id ="wed_1100" class = "schedule-cell"></td>
+                        <td id ="thu_1100" class = "schedule-cell"></td>
+                        <td id ="fri_1100" class = "schedule-cell"></td>
+                        <td id ="sat_1100" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>11:30 AM</td>
+                        <td id ="sun_1130" class = "schedule-cell"></td>
+                        <td id ="mon_1130" class = "schedule-cell"></td>
+                        <td id ="tue_1130" class = "schedule-cell"></td>
+                        <td id ="wed_1130" class = "schedule-cell"></td>
+                        <td id ="thu_1130" class = "schedule-cell"></td>
+                        <td id ="fri_1130" class = "schedule-cell"></td>
+                        <td id ="sat_1130" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>12 PM</td>
+                        <td id ="sun_1200" class = "schedule-cell"></td>
+                        <td id ="mon_1200" class = "schedule-cell"></td>
+                        <td id ="tue_1200" class = "schedule-cell"></td>
+                        <td id ="wed_1200" class = "schedule-cell"></td>
+                        <td id ="thu_1200" class = "schedule-cell"></td>
+                        <td id ="fri_1200" class = "schedule-cell"></td>
+                        <td id ="sat_1200" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>12:30 PM</td>
+                        <td id ="sun_1230" class = "schedule-cell"></td>
+                        <td id ="mon_1230" class = "schedule-cell"></td>
+                        <td id ="tue_1230" class = "schedule-cell"></td>
+                        <td id ="wed_1230" class = "schedule-cell"></td>
+                        <td id ="thu_1230" class = "schedule-cell"></td>
+                        <td id ="fri_1230" class = "schedule-cell"></td>
+                        <td id ="sat_1230" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>1 PM</td>
+                        <td id ="sun_1300" class = "schedule-cell"></td>
+                        <td id ="mon_1300" class = "schedule-cell"></td>
+                        <td id ="tue_1300" class = "schedule-cell"></td>
+                        <td id ="wed_1300" class = "schedule-cell"></td>
+                        <td id ="thu_1300" class = "schedule-cell"></td>
+                        <td id ="fri_1300" class = "schedule-cell"></td>
+                        <td id ="sat_1300" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>1:30 PM</td>
+                        <td id ="sun_1330" class = "schedule-cell"></td>
+                        <td id ="mon_1330" class = "schedule-cell"></td>
+                        <td id ="tue_1330" class = "schedule-cell"></td>
+                        <td id ="wed_1330" class = "schedule-cell"></td>
+                        <td id ="thu_1330" class = "schedule-cell"></td>
+                        <td id ="fri_1330" class = "schedule-cell"></td>
+                        <td id ="sat_1330" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>2 PM</td>
+                        <td id ="sun_1400" class = "schedule-cell"></td>
+                        <td id ="mon_1400" class = "schedule-cell"></td>
+                        <td id ="tue_1400" class = "schedule-cell"></td>
+                        <td id ="wed_1400" class = "schedule-cell"></td>
+                        <td id ="thu_1400" class = "schedule-cell"></td>
+                        <td id ="fri_1400" class = "schedule-cell"></td>
+                        <td id ="sat_1400" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>2:30 PM</td>
+                        <td id ="sun_1430" class = "schedule-cell"></td>
+                        <td id ="mon_1430" class = "schedule-cell"></td>
+                        <td id ="tue_1430" class = "schedule-cell"></td>
+                        <td id ="wed_1430" class = "schedule-cell"></td>
+                        <td id ="thu_1430" class = "schedule-cell"></td>
+                        <td id ="fri_1430" class = "schedule-cell"></td>
+                        <td id ="sat_1430" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>3 PM</td>
+                        <td id ="sun_1500" class = "schedule-cell"></td>
+                        <td id ="mon_1500" class = "schedule-cell"></td>
+                        <td id ="tue_1500" class = "schedule-cell"></td>
+                        <td id ="wed_1500" class = "schedule-cell"></td>
+                        <td id ="thu_1500" class = "schedule-cell"></td>
+                        <td id ="fri_1500" class = "schedule-cell"></td>
+                        <td id ="sat_1500" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>3:30 PM</td>
+                        <td id ="sun_1530" class = "schedule-cell"></td>
+                        <td id ="mon_1530" class = "schedule-cell"></td>
+                        <td id ="tue_1530" class = "schedule-cell"></td>
+                        <td id ="wed_1530" class = "schedule-cell"></td>
+                        <td id ="thu_1530" class = "schedule-cell"></td>
+                        <td id ="fri_1530" class = "schedule-cell"></td>
+                        <td id ="sat_1530" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>4 PM</td>
+                        <td id ="sun_1600" class = "schedule-cell"></td>
+                        <td id ="mon_1600" class = "schedule-cell"></td>
+                        <td id ="tue_1600" class = "schedule-cell"></td>
+                        <td id ="wed_1600" class = "schedule-cell"></td>
+                        <td id ="thu_1600" class = "schedule-cell"></td>
+                        <td id ="fri_1600" class = "schedule-cell"></td>
+                        <td id ="sat_1600" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>4:30 PM</td>
+                        <td id ="sun_1630" class = "schedule-cell"></td>
+                        <td id ="mon_1630" class = "schedule-cell"></td>
+                        <td id ="tue_1630" class = "schedule-cell"></td>
+                        <td id ="wed_1630" class = "schedule-cell"></td>
+                        <td id ="thu_1630" class = "schedule-cell"></td>
+                        <td id ="fri_1630" class = "schedule-cell"></td>
+                        <td id ="sat_1630" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>5 PM</td>
+                        <td id ="sun_1700" class = "schedule-cell"></td>
+                        <td id ="mon_1700" class = "schedule-cell"></td>
+                        <td id ="tue_1700" class = "schedule-cell"></td>
+                        <td id ="wed_1700" class = "schedule-cell"></td>
+                        <td id ="thu_1700" class = "schedule-cell"></td>
+                        <td id ="fri_1700" class = "schedule-cell"></td>
+                        <td id ="sat_1700" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>5:30 PM</td>
+                        <td id ="sun_1730" class = "schedule-cell"></td>
+                        <td id ="mon_1730" class = "schedule-cell"></td>
+                        <td id ="tue_1730" class = "schedule-cell"></td>
+                        <td id ="wed_1730" class = "schedule-cell"></td>
+                        <td id ="thu_1730" class = "schedule-cell"></td>
+                        <td id ="fri_1730" class = "schedule-cell"></td>
+                        <td id ="sat_1730" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>6 PM</td>
+                        <td id ="sun_1800" class = "schedule-cell"></td>
+                        <td id ="mon_1800" class = "schedule-cell"></td>
+                        <td id ="tue_1800" class = "schedule-cell"></td>
+                        <td id ="wed_1800" class = "schedule-cell"></td>
+                        <td id ="thu_1800" class = "schedule-cell"></td>
+                        <td id ="fri_1800" class = "schedule-cell"></td>
+                        <td id ="sat_1800" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>6:30 PM</td>
+                        <td id ="sun_1830" class = "schedule-cell"></td>
+                        <td id ="mon_1830" class = "schedule-cell"></td>
+                        <td id ="tue_1830" class = "schedule-cell"></td>
+                        <td id ="wed_1830" class = "schedule-cell"></td>
+                        <td id ="thu_1830" class = "schedule-cell"></td>
+                        <td id ="fri_1830" class = "schedule-cell"></td>
+                        <td id ="sat_1830" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>7 PM</td>
+                        <td id ="sun_1900" class = "schedule-cell"></td>
+                        <td id ="mon_1900" class = "schedule-cell"></td>
+                        <td id ="tue_1900" class = "schedule-cell"></td>
+                        <td id ="wed_1900" class = "schedule-cell"></td>
+                        <td id ="thu_1900" class = "schedule-cell"></td>
+                        <td id ="fri_1900" class = "schedule-cell"></td>
+                        <td id ="sat_1900" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>7:30 PM</td>
+                        <td id ="sun_1930" class = "schedule-cell"></td>
+                        <td id ="mon_1930" class = "schedule-cell"></td>
+                        <td id ="tue_1930" class = "schedule-cell"></td>
+                        <td id ="wed_1930" class = "schedule-cell"></td>
+                        <td id ="thu_1930" class = "schedule-cell"></td>
+                        <td id ="fri_1930" class = "schedule-cell"></td>
+                        <td id ="sat_1930" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>8 PM</td>
+                        <td id ="sun_2000" class = "schedule-cell"></td>
+                        <td id ="mon_2000" class = "schedule-cell"></td>
+                        <td id ="tue_2000" class = "schedule-cell"></td>
+                        <td id ="wed_2000" class = "schedule-cell"></td>
+                        <td id ="thu_2000" class = "schedule-cell"></td>
+                        <td id ="fri_2000" class = "schedule-cell"></td>
+                        <td id ="sat_2000" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>8:30 PM</td>
+                        <td id ="sun_2030" class = "schedule-cell"></td>
+                        <td id ="mon_2030" class = "schedule-cell"></td>
+                        <td id ="tue_2030" class = "schedule-cell"></td>
+                        <td id ="wed_2030" class = "schedule-cell"></td>
+                        <td id ="thu_2030" class = "schedule-cell"></td>
+                        <td id ="fri_2030" class = "schedule-cell"></td>
+                        <td id ="sat_2030" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>9 PM</td>
+                        <td id ="sun_2100" class = "schedule-cell"></td>
+                        <td id ="mon_2100" class = "schedule-cell"></td>
+                        <td id ="tue_2100" class = "schedule-cell"></td>
+                        <td id ="wed_2100" class = "schedule-cell"></td>
+                        <td id ="thu_2100" class = "schedule-cell"></td>
+                        <td id ="fri_2100" class = "schedule-cell"></td>
+                        <td id ="sat_2100" class = "schedule-cell"></td>
+                    </tr>
+                    <tr>
+                        <td align='center'>9:30 PM</td>
+                        <td id ="sun_2130" class = "schedule-cell"></td>
+                        <td id ="mon_2130" class = "schedule-cell"></td>
+                        <td id ="tue_2130" class = "schedule-cell"></td>
+                        <td id ="wed_2130" class = "schedule-cell"></td>
+                        <td id ="thu_2130" class = "schedule-cell"></td>
+                        <td id ="fri_2130" class = "schedule-cell"></td>
+                        <td id ="sat_2130" class = "schedule-cell"></td>
+                    </tr>
+        
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <div id="extra-note-tab" class="tabcontent">
+        <div id="extra-note-response-container"></div>
+        <form>
+            <h3>Add Exam</h3>
+            <label for="add-exam-subject">Subject:</label>
+            <input type="text" id="add-exam-subject">
+            <label for="add-exam-number">Number:</label>
+            <input type="text" id="add-exam-number">
+            <label for="add-exam-date">Due date:</label>
+            <input type="text" id="add-exam-date">
+            <label for="add-exam-time">Time due:</label>
+            <input type="text" id="add-exam-time">
+            <div>
+                <button id="btn-add-exam">Add</button>
+                <output id="btn-add-exam-out"></output>
+            </div>
+        </form> 
+
+        <form>
+            <h3>Add Assignment</h3>
+            <label for="add-assignment-subject">Subject:</label>
+            <input type="text" id="add-assignment-subject">
+            <label for="add-assignment-number">Number:</label>
+            <input type="text" id="add-assignment-number">
+            <label for="add-assignment-date">Due date:</label>
+            <input type="text" id="add-assignment-date">
+            <label for="add-assignment-time">Time due:</label>
+            <input type="text" id="add-assignment-time">
+            <div>
+                <button id="btn-add-assignment">Add</button>
+                <output id="btn-add-assignment-out"></output>
+            </div>
+        </form>
+
+        <h3>View Exams/Assignments</h3>
+        <div>
+            <button id="btn-view-exams">View exams</button>
+            <output id="btn-view-exams-out"></output>
+            <button id="btn-view-assignments">View assignments</button>
+            <output id="btn-view-assignments-out"></output>
+        </div>
+
+    </div>
+    <table id="exam-note-table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Subject</th>
+                <th>Number</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Delete Note</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <table id="assignment-note-table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Subject</th>
+                <th>Number</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Delete Note</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <div class="container">
+
+        <div id="popup" class="popup-content">
+            <label class="switch">
+                <input type="checkbox" id="dark-mode-toggle">
+                <span class="slider round"></span>
+            </label>
+            <button id="logout">Logout</button>
+            <button id="close-btn">Close</button>
+        </div>
+    </div>
+
+    <div id="student-services-tab" class="tabcontent">
+        <h2>MUN Student Services</h2>
+        <p><a href="https://www.mun.ca/" target="_blank">MUN Main Website</a></p>
+        <p><a href="https://login.mun.ca/cas/login?service=https%3A%2F%2Fselfservice.mun.ca%2Fadmit%2F" target="_blank">MUN Self Service</a></p>
+        <p><a href="https://online.mun.ca/d2l/loginh/" target="_blank">Online Learning (Brightspace)</a></p>
+        <p><a href="https://www.mun.ca/cio/it-services/network-mobile-devices-and-phones/wi-fi-networks/" target="_blank">MUN Wifi</a></p>
+        <p><a href="https://mun.starrezhousing.com/StarRezPortal/EFFF3F5E/1/1/Home-Home?UrlToken=5484AD89" target="_blank">MUN Housing Portal</a></p>
+        <p><a href="https://www.mun.ca/cio/need-help/" target="_blank">ITS Service Desk</a></p>
+        <p><a href="https://www.facebook.com/groups/386771451797781/" target="_blank"> MUN Course Review and Advice (Facebook group)</a></p>
+        <p><a href="https://www.facebook.com/groups/32886073853/" target="_blank">MUN Used Text Book Sale (Facebook group)</a></p>
+    
+    </div>
+
+
+
+    <script src="./js/main.js"></script>
+    <script src="./js/findClass.js"></script>
+    <script src="./js/schedule.js"></script>
+    <script src="./js/deleteClass.js"></script>
+    <script src="./js/extraNote.js"></script>
+    <script src="./js/studentServices.js"></script>
+    <script src="./js/logoutTab.js"></script>
+    <script>
+        var username = localStorage.getItem("username");
+        document.getElementById("username-label").textContent = username;
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const profileBtn = document.getElementById("profile-btn");
+            const username = localStorage.getItem("username");
+            profileBtn.innerHTML = "Hello, " + username;
+        });
+      
+    </script>
+    <script>
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+        }
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+        document.getElementById('close-btn').addEventListener('click', closePopup);
+    </script>
+
+    <script>
+        document.getElementById('logout').addEventListener('click', function(){
+            window.location.href = 'login.html';
+        })
+    </script>
+
+    <script>
+        document.getElementById('dark-mode-toggle').addEventListener('change', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+
+</body>
+
+ 
+ 
+
+
+
+ 

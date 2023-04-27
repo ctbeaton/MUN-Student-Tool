@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+          
+          
+<link rel="stylesheet" 
+href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+integrity=
+"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+crossorigin="anonymous">    
+          
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+          
+</head>
+<body>
+      
+    <br>
+    <br>
+    <br>
+    <div class="container" >
+        <div class="row">
+        <div class="col-md-3">
+                      
+        </div>
+                  
+        <div class="col-md-6 main">
+                      
+            <form id = "login-form">
+                      
+            <h1>Login</h1>
+                              
+            <input class="box" type="text" name="username" id="username" 
+            placeholder="Username"  required /><br>
+                              
+            <input class="box" type="password" name="password" 
+            id="password" placeholder="Password " required/><br>
+            <br>
+
+            <button type="button" id="btn-enter" class="btn-enter">Login</button>
+            
+            <output id="try-login"></output>
+
+            </form>
+                      
+        </div>
+                  
+                  
+        <div class="col-md-3">
+        </div>
+                  
+    </div>
+    </div>
+
+    <script>
+      $(function () {
+        $("#btn-enter").click(function () {
+          $.post("/login/verify", $("#login-form").serialize(), function (response) {
+            if (response.success) {
+              localStorage.setItem("username", $("#username").val());
+              window.location.href = "/schedule.html";
+            } else {
+              $("#try-login").text("Login failed. Please try again.");
+            }
+          }, "json");
+        });
+      });
+    </script> 
+
+  </body>
+</html>

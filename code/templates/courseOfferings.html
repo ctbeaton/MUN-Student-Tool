@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<head>
+    <title>Select Session</title>
+    <style>
+        td{
+            width:100pt;
+            height:40pt;
+            text-align:center;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- <div id="header">
+        <span id="username-label"></span>
+    </div> -->
+    <!-- <div class="tab">
+        <button id="add-class-tab-btn" class="tablinks">Add Class</button>
+        <button id="delete-class-tab-btn" class="tablinks">Delete Class</button>
+        <button id="view-schedule-tab-btn" class="tablinks">View Schedule</button>
+        <button id="profile-btn" class="tablinks" onclick="showPopup()"></button>
+        <button id="extra-note-tab-btn" class = "tablinks">Extra Notes</button>
+        <button id="student-services-tab-btn" class="tablinks">Student Services</button>
+        <button id="course-offerings-tab-btn" class="tablinks"><a href="/selectsessionandsubject">Course Offerings</a></button>
+    </div> -->
+
+    <h1>Select Session and Subject</h1>
+    <hr>
+    <form name="form1" id="form1" action="/courseofferings" method="get"> 
+        Session: <select name="session" id="session">
+          <option value="None" selected="None">None</option>
+          <option value="2022-2023-Fall" selected="2022-2023-Fall">2022-2023 Fall</option>
+          <option value="2022-2023-Spring" selected="2022-2023-Spring">2022-2023 Spring</option>
+          <option value="2022-2023-Winter" selected="2022-2023-Winter">2022-2023 Winter</option>
+        </select>
+        <br><br>
+        Subject: <select name="subject" id="subject">
+          <option value="All" selected="All">All</option>
+          <option value="ANTH" selected="ANTH">Anthropology</option>
+          <option value="ARCH" selected="ARCH">Archaeology</option>
+          <option value="BIOC" selected="BIOC">Biochemistry</option>
+          <option value="BIOL" selected="BIOL">Biology</option>
+          <option value="BUSI" selected="BUSI">Business</option>
+          <option value="CHEM" selected="CHEM">Chemistry</option>
+          <option value="CIV" selected="CIV">Civil Engineering</option>
+          <option value="CLAS" selected="CLAS">Classics</option>
+          <option value="CMST" selected="CMST">Cummunication Studies</option>
+          <option value="COMP" selected="COMP">Computer Science</option>
+          <option value="CRIM" selected="CRIM">Criminology</option>
+          <option value="EASC" selected="EASC">Earth Scienes</option>
+          <option value="ECE" selected="ECE">Electrical/Computer Engineering</option>
+          <option value="ECON" selected="ECON">Economy</option>
+          <option value="ED" selected="ED">Education</option>
+          <option value="LANG" selected="LANG">Language</option>
+          <option value="LING" selected="LING">Linguistics</option>
+          <option value="LWSO" selected="LWSO">Law and Society</option>
+          <option value="MATH" selected="MATH">Mathematics</option>
+          <option value="ME" selected="ME">Mechanical Engineering</option>
+          <option value="MED" selected="MED">Medicine</option>
+          <option value="MEMS" selected="MEMS">Medieval & Early Modern Stud</option>
+          <option value="MUS" selected="MUS">Music</option>
+          <option value="NURS" selected="NURS">Nursing</option>
+          <option value="OCSC" selected="OCSC">Ocean Sciences</option>
+          <option value="ONAE" selected="ONAE">Ocean/Naval Engieering</option>
+          <option value="PHAR" selected="PHAR">Pharmacy</option>
+          <option value="PHIL" selected="PHIL">Philosphy</option>
+          <option value="PHYS" selected="PHYS">Physics</option>
+          <option value="POSC" selected="POSC">Post Graduate Certificate</option>
+          <option value="PROC" selected="PROC">Process Engieering</option>
+          <option value="PSYC" selected="PSYC">Psychology</option>
+          <option value="RELS" selected="RELS">Religious Studies</option>
+          <option value="RUSS" selected="RUSS">Russian</option>
+          <option value="SCWK" selected="SCWK">Social Work</option>
+          <option value="SOCI" selected="SOCI">Sociology</option>
+          <option value="SPAN" selected="SPAN">Spanish</option>
+          <option value="STAT" selected="STAT">Statistic</option>
+          <option value="UGRD" selected="UGRD">Undergraduate Studies</option>
+        </select>
+        <br><br>
+        <br><br>
+        <input type="submit" value="Submit">
+      </form> 
+      <table>
+        <thead>
+            <th>Course Number</th>
+            <th>Course Name</th>
+            
+        </thead>
+        <tbody id="tbody1">
+            <tr>
+                <td>1001</td>
+                <td>Intro to Comp</td>   
+            </tr>
+         
+        </tbody>
+      </table>
+      <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const dataStr = urlParams.get('data');
+        const data = JSON.parse(dataStr);
+        document.getElementById('tbody1').innerHTML+='<tr>';
+        document.getElementById('tbody1').innerHTML+='<td>1001</td><td>1001</td>';
+        document.getElementById('tbody1').innerHTML+='</tr>';
+
+      </script>
+
+</body>
+
+ 

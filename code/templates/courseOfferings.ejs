@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+    <title>Select Session</title>
+    <style>
+        td{
+            width:100pt;
+            height:40pt;
+            text-align:center;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- <div id="header">
+        <span id="username-label"></span>
+    </div> -->
+    <!-- <div class="tab">
+        <button id="add-class-tab-btn" class="tablinks">Add Class</button>
+        <button id="delete-class-tab-btn" class="tablinks">Delete Class</button>
+        <button id="view-schedule-tab-btn" class="tablinks">View Schedule</button>
+        <button id="profile-btn" class="tablinks" onclick="showPopup()"></button>
+        <button id="extra-note-tab-btn" class = "tablinks">Extra Notes</button>
+        <button id="student-services-tab-btn" class="tablinks">Student Services</button>
+        <button id="course-offerings-tab-btn" class="tablinks"><a href="/selectsessionandsubject">Course Offerings</a></button>
+    </div> -->
+
+    <h1>Showing all the Course Offerings of Session:<%= session %> Subject :<%= subject  %> </h1>
+    <hr>
+      <table>
+        <thead>
+            <th>Course Number</th>
+            <th>Course Name</th>
+            
+        </thead>
+        <tbody id="tbody1">
+          <%= for(var i = 0;i< data.length; i++){ %>
+            <tr>
+                <td><%= data[i].number %></td>
+                <td><%= data[i].name %></td>   
+            </tr>
+          <%= } %> 
+        </tbody>
+      </table>
+
+</body>
+
+ 
